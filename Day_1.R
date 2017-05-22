@@ -1,2 +1,1 @@
-#Edited on web
-#Edited on comp
+#Day 1 sample code
