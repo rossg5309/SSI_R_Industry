@@ -68,3 +68,54 @@ length(x['history'])
 x[1:3]
 x[[1:3]] #cant do this
 x[c('order_id','item_categories')]
+
+x <- data.frame('categories'=sample(letters,10, replace=T), 'values'=rnorm(10))
+x
+
+y <- list(
+  "set1" = data.frame('categories'=sample(letters,10, replace=T), 'values'=rnorm(10)),
+  "set2" = data.frame('categories'=sample(letters,5, replace=T), 'values'=rnorm(5))
+)
+
+#extracting subset
+x$categories
+x[,c('categories')]
+x[[1]]
+x[,c(1,2)]
+x[,-1]
+x[,c(T,F)]
+x[1,2]
+x[1:4,2]
+x[1:4,2,drop = F] #if you want to keep the data.frame structure
+subset(x,categories == 'c',c(values,categories))
+
+x <- data.frame('categories'=sample(letters,10, replace=T), 'values'=rnorm(10), stringsAsFactors = F)
+x$categories #now a character vector instead of factor
+y <- data.frame('categories'=sample(letters,10, replace=T), 'values'=rnorm(10), stringsAsFactors = F)
+z <- rbind(x,y)
+x
+y
+z
+names(y)<-c('type','weight')
+y
+rbind(x,y)
+z <- cbind(x,y)
+z
+x1 <- x[1:7,]
+x1
+cbind(x1,y)
+x1 <- x[1:5,]
+x1
+cbind(x1,y) #x1 is recycled
+
+library(jsonlite)
+x <- fromJSON('example_json_3.json')
+x
+
+x[,"bio"][1]
+
+library(httr)
+# https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&key=YOUR_API_KEY
+resp<-GET("https://maps.googleapis.com/maps/api/distancematrix/json",query = list("origins"="Vancouver+BC|Seattle","destinations"="San+Francisco|Victoria+BC","key"="AIzaSyAv1fkBQeAWbbtf5PheRRkvnYI3HE8KKtY"))
+results <- content(resp)
+results
